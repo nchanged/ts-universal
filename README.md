@@ -2,7 +2,7 @@
 
 A simple gulp plugin that makes it possible to use typescript modules painlessly on browser and on server
 
-Wraps each file into a neat closure, providing custom expors and require function, that works flawlessly on both ends
+Wraps each file into a neat closure, providing custom exports and require function, that work flawlessly on both ends
 ```js
  __ts.module("utils/utils.js", function(exports, require) {
         "use strict";
@@ -11,6 +11,8 @@ Wraps each file into a neat closure, providing custom expors and require functio
     })
 ```
 
+## How to try:
+Clone this project and run "gulp" => [check out.js](build/out.js)
 
 ## Gulp Build example
 
@@ -44,3 +46,11 @@ Check what it [converts to](build/out.js)
 ## Win
 
 *out.js* can be required with "root.ts" exposed both to front end and backend!
+
+To test in on server:
+
+```bash
+node build/test.js
+```
+
+On browser -> copy out.js and try executing it on browser!
