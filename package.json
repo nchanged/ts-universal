@@ -1,6 +1,6 @@
 {
   "name": "ts-universal",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "description": "",
   "main": "index.js",
   "scripts": {
@@ -17,6 +17,7 @@
   },
   "homepage": "https://github.com/nchanged/ts-universal#readme",
   "dependencies": {
+    "concat-with-sourcemaps": "^1.0.4",
     "through2": "^2.0.1"
   },
   "devDependencies": {
@@ -24,6 +25,7 @@
     "gulp-concat": "^2.6.0",
     "gulp-jsbeautifier": "^2.0.3",
     "gulp-rename": "^1.2.2",
+    "gulp-sourcemaps": "^1.6.0",
     "gulp-typescript": "^2.13.6"
   }
 }

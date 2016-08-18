@@ -1,8 +1,10 @@
 "use strict";
+
 const through = require('through2');
 const path = require('path');
 const fs = require('fs');
 const lib = fs.readFileSync(__dirname + '/_ts.js').toString();
+const Concat = require('concat-with-sourcemaps');
 
 class Wrapper {
    static wrapFile(name, contents) {
@@ -25,6 +27,8 @@ const gulp = (target, opts) => {
    var baseDir = opts.base;
    var expose = opts.expose || 'undefined';
    var latestFile;
+   var concat = new Concat(true, 'all.js', '\n');
+   concat.add(null, Wrapper.getHeader());
 
    function bufferContents(file, enc, cb) {
       var fname = file.path;
@@ -34,7 +38,7 @@ const gulp = (target, opts) => {
             fname = fname.slice(baseDir.length, fname.length);
          }
       }
-      contents.push(Wrapper.wrapFile(fname, file.contents.toString()));
+      concat.add(fname, Wrapper.wrapFile(fname, file.contents.toString()), file.sourceMap);
       latestFile = file;
       cb();
    }
@@ -44,8 +48,9 @@ const gulp = (target, opts) => {
          contents: false
       });
       joinedFile.path = path.join(latestFile.base, target);
-      contents.push(Wrapper.getFooter(expose))
-      joinedFile.contents = new Buffer(contents.join('\n'));
+      concat.add(null, Wrapper.getFooter(expose))
+      joinedFile.contents = concat.content;
+      joinedFile.sourceMap = JSON.parse(concat.sourceMap);
       this.push(joinedFile);
       cb();
    }
