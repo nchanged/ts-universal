@@ -5,10 +5,10 @@ A simple gulp plugin that makes it possible to use typescript modules painlessly
 Wraps each file into a neat closure, providing custom exports and require function, that work flawlessly on both ends
 ```js
  __ts.module("utils/utils.js", function(exports, require) {
-        "use strict";
-        const misc = require('./misc');
-        exports.something = {};
-    })
+     "use strict";
+     const misc = require('./misc');
+     exports.something = {};
+})
 ```
 
 ## How to try:
@@ -41,7 +41,7 @@ gulp.task('default', function() {
 });
 ```
 
-Check what it [converts to](build/out.js)
+Check what it [converts to](bui\ld/out.js)
 
 ## Win
 
