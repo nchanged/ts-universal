@@ -1,7 +1,6 @@
 var __ts = {
    register: {},
-   pathJoin: function() {
-      var parts = [];
+   pathJoin: function() { var parts = [];
       for (var i = 0, l = arguments.length; i < l; i++) {
          parts = parts.concat(arguments[i].split("/"));
       }

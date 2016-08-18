@@ -16,11 +16,11 @@ gulp.task('default', function() {
          expose: 'root'
       }))
       .pipe(rename('out.js'))
-      .pipe(prettify({
-         js: {
-            max_preserve_newlines: 1
-         }
-      }))
-      //.pipe(sourcemaps.write())
+      // .pipe(prettify({
+      //    js: {
+      //       max_preserve_newlines: 1
+      //    }
+      // }))
+      .pipe(sourcemaps.write())
       .pipe(gulp.dest('build/'));
 });
