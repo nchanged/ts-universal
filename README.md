@@ -2,7 +2,7 @@
 
 A simple gulp plugin that makes it possible to use typescript modules painlessly on browser and on server
 
-Wraps each file into a neat closure, providing custom exports and require function, that work flawlessly on both ends
+Wraps each file into a neat closure, providing custom exports and require function, that work flawlessly in both ends
 ```js
  __ts.module("utils/utils.js", function(exports, require) {
      "use strict";
