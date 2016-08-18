@@ -15,7 +15,7 @@ let writeFooter = (exposed) => {
    return '__ts.expose(__scope__, "' + exposed + '") })( typeof exports !== "undefined" ? exports : window, typeof exports !== "undefined" )';
 }
 
-const gulp = (target, opts) => {
+let tsUniversal = (target, opts) => {
    opts = opts || {};
    var baseDir = opts.base;
    var expose = opts.expose || 'undefined';
@@ -24,7 +24,7 @@ const gulp = (target, opts) => {
    // writing header first
    concat.add(null, HEADER);
 
-   function bufferContents(file, enc, cb) {
+   let bufferContents = (file, enc, cb) => {
       var fname = file.path;
       fname = fname.replace(/\\/g, "/") // replace slashed (window platform)
       if (baseDir) { // slicing base dir
@@ -39,7 +39,7 @@ const gulp = (target, opts) => {
       cb();
    }
 
-   function endStream(cb) {
+   let endStream = (cb) => {
       var joinedFile = latestFile.clone({
          contents: false
       });
@@ -52,4 +52,4 @@ const gulp = (target, opts) => {
    }
    return through.obj(bufferContents, endStream);
 }
-module.exports = gulp;
+module.exports = tsUniversal;
