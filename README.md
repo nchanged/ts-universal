@@ -12,7 +12,7 @@ Wraps each file into a neat closure, providing custom exports and require functi
 ```
 
 ## How to try:
-Clone this project and run "gulp" => [check out.js](build/out.js)
+Clone this project and run "gulp" check => [out.js#L63](build/out.js)
 
 ## Gulp Build example
 
@@ -40,8 +40,6 @@ gulp.task('default', function() {
       .pipe(gulp.dest('build/'));
 });
 ```
-
-Check what it [converts to](bui\ld/out.js)
 
 ## Win
 
