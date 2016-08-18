@@ -62,4 +62,4 @@ To test in on server:
 node build/test.js
 ```
 
-On browser -> just open (build/index.html)[build/index.html] in your browser!
+On browser -> just open [build/index.html](build/index.html) in your browser!
