@@ -1,3 +1,4 @@
-import BClass from './foo/b';
+import {Hello} from './Hello/Hello';
 
-export var SuperStuff = BClass
+
+export let hello = new Hello();	

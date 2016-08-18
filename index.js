@@ -1,3 +1,4 @@
+"use strict";
 const through = require('through2');
 const path = require('path');
 const fs = require('fs');
@@ -6,7 +7,7 @@ const lib = fs.readFileSync(__dirname + '/_ts.js').toString();
 class Wrapper {
    static wrapFile(name, contents) {
       let data = ['__ts.module(', '"', name, '"',
-         ', function(exports, require){\n', contents, '\n})\n'
+         ', function(exports, require){\n', contents, '\n});\n'
       ]
       return data.join('');
    }
@@ -27,6 +28,7 @@ const gulp = (target, opts) => {
 
    function bufferContents(file, enc, cb) {
       var fname = file.path;
+      fname = fname.replace(/\\/g, "/")
       if (baseDir) { // slicing base dir
          if (fname.indexOf(baseDir) === 0) {
             fname = fname.slice(baseDir.length, fname.length);

@@ -60,6 +60,42 @@
             }
         }
     }
+    __ts.module("Space/Space.js", function(exports, require) {
+        "use strict";
+        class Space {
+            constructor() {
+                this.text = ' ';
+            }
+        }
+        exports.Space = Space;
+    })
+    __ts.module("World/World.js", function(exports, require) {
+        "use strict";
+        const Space_1 = require('../Space/Space');
+        class World {
+            constructor() {
+                let space = new Space_1.Space();
+                this.text = space.text + 'World!';
+            }
+        }
+        exports.World = World;
+    })
+    __ts.module("Hello/Hello.js", function(exports, require) {
+        "use strict";
+        const World_1 = require('../World/World');
+        class Hello {
+            constructor() {
+                let world = new World_1.World();
+                this.text = 'Hello' + world.text;
+            }
+        }
+        exports.Hello = Hello;
+    })
+    __ts.module("root.js", function(exports, require) {
+        "use strict";
+        const Hello_1 = require('./Hello/Hello');
+        exports.hello = new Hello_1.Hello();
+    })
     __ts.module("bar/a.js", function(exports, require) {
         "use strict";
         class AClass {}
@@ -76,11 +112,6 @@
             value: true
         });
         exports.default = BClass;
-    })
-    __ts.module("root.js", function(exports, require) {
-        "use strict";
-        const b_1 = require('./foo/b');
-        exports.SuperStuff = b_1.default;
     })
     __ts.expose(__scope__, "root")
 })(typeof exports !== "undefined" ? exports : window, typeof exports !== "undefined")
