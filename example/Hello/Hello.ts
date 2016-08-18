@@ -8,6 +8,6 @@ export class Hello {
 	}
 	saySomething()
 	{
-		alert(1);
+		console.log("Something!")
 	}
 }

@@ -1,2 +1,2 @@
 var out = require('./out.js');
-console.log(out);
+out.hello.saySomething();
