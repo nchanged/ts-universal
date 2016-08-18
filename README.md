@@ -2,6 +2,8 @@
 
 A simple gulp plugin that makes it possible to use typescript modules painlessly on browser and on server
 
+![Coding](tsuniversal.gif)
+
 ## Features
 
 * Converts your code into a unversal module without transpiling it
