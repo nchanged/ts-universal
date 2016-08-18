@@ -2,7 +2,17 @@
 
 A simple gulp plugin that makes it possible to use typescript modules painlessly on browser and on server
 
-Wraps each file into a neat closure, providing custom exports and require function, that work flawlessly in both ends
+## Features
+
+* Converts your code into a unversal module without transpiling it
+* Exposes target naturaly to window or NodeJS exports
+* 100% Typescript sourcemaps support
+* Simplicity - No need to configure!
+
+
+## How it works
+
+*tsUniversal* Wraps each file into a neat closure, providing custom exports and require function, that work flawlessly in both ends
 ```js
  __ts.module("utils/utils.js", function(exports, require) {
      "use strict";
@@ -23,22 +33,23 @@ const ts = require('gulp-typescript');
 const concat = require('gulp-concat');
 const tsUniversal = require("./index.js");
 const prettify = require('gulp-jsbeautifier');
+const sourcemaps = require('gulp-sourcemaps');
 const tsProject = ts.createProject('example/tsconfig.json');
 gulp.task('default', function() {
    return gulp.src('example/**/*.ts')
+      .pipe(sourcemaps.init())
       .pipe(ts(tsProject))
-      .pipe(tsUniversal('build/', {
+       
+       .pipe(tsUniversal('build/', { // ALL YOU NEED
          base: 'build/',
          expose: 'root'
-      }))
+       }))
+      
       .pipe(rename('out.js'))
-      .pipe(prettify({
-         js: {
-            max_preserve_newlines: 1
-         }
-      }))
+      .pipe(sourcemaps.write())
       .pipe(gulp.dest('build/'));
 });
+
 ```
 
 ## Win
@@ -51,4 +62,4 @@ To test in on server:
 node build/test.js
 ```
 
-On browser -> copy out.js and try executing it on browser!
+On browser -> just open (build/index.html)[build/index.html] in your browser!
