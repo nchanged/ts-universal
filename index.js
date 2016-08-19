@@ -3,24 +3,21 @@
 const through = require('through2');
 const path = require('path');
 const fs = require('fs');
-
-const lib = fs.readFileSync(__dirname + '/_ts.js').toString()
-   .replace(/(\n|\t)/g,'')
-   .replace(/\s{2}/g, '')
-
 const Concat = require('concat-with-sourcemaps');
-const HEADER = '(function(__scope__, $isBackend){' + lib + '\n';
+const HEADER = '(function(___env___){\n/* ****** Setup ****** */\nvar __scope__ = ___env___.scope;\nvar $isBackend = ___env___.isBackend;\nvar __ts__ = ___env___.ts;\n\n'
 
+// read footer template
 let writeFooter = (exposed) => {
-   return '__ts.expose(__scope__, "' + exposed + '") })( typeof exports !== "undefined" ? exports : window, typeof exports !== "undefined" )';
+   let footer = fs.readFileSync(__dirname + '/_footer.js').toString()
+   footer = footer.split('$_exposed_').join(exposed);
+   footer = footer.replace(/(\n|\t|\s{2})/g,'')
+   return footer;
 }
 
 let tsUniversal = (target, opts) => {
    opts = opts || {};
    var baseDir = opts.base;
-
    var expose = opts.expose || 'undefined';
-
    var latestFile;
    var concat = new Concat(true, 'out.js', '\n');
    // writing header first
@@ -34,7 +31,7 @@ let tsUniversal = (target, opts) => {
             fname = fname.slice(baseDir.length, fname.length);
          }
       }
-      concat.add(null, '/* ******* ' + file.sourceMap.sources[0] +' ******* */\n__ts.module("' + fname + '", function(exports, require){')
+      concat.add(null, '/* ******* ' + file.sourceMap.sources[0] +' ******* */\n__ts__.module("' + fname + '", function(exports, require){')
       concat.add(fname, file.contents, file.sourceMap);
       concat.add(null, '});\n')
       latestFile = file;
