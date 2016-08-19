@@ -13,7 +13,7 @@ gulp.task('default', function() {
 
    .pipe(tsUniversal('build/', {
          base: 'build/',
-         expose: 'root11'
+         expose: 'root'
       }))
       .pipe(rename('out.js'))
       .pipe(sourcemaps.write())
