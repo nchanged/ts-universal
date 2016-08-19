@@ -18,13 +18,15 @@ let writeFooter = (exposed) => {
 let tsUniversal = (target, opts) => {
    opts = opts || {};
    var baseDir = opts.base;
+
    var expose = opts.expose || 'undefined';
+
    var latestFile;
-   var concat = new Concat(true, '', '\n');
+   var concat = new Concat(true, 'out.js', '\n');
    // writing header first
    concat.add(null, HEADER);
 
-   let bufferContents = (file, enc, cb) => {
+   function bufferContents(file, enc, cb) {
       var fname = file.path;
       fname = fname.replace(/\\/g, "/") // replace slashed (window platform)
       if (baseDir) { // slicing base dir
@@ -39,7 +41,7 @@ let tsUniversal = (target, opts) => {
       cb();
    }
 
-   let endStream = (cb) => {
+   function endStream(cb){
       var joinedFile = latestFile.clone({
          contents: false
       });

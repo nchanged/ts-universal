@@ -55,6 +55,8 @@ var __ts = {
          for (var key in exported) {
             scope[key] = exported[key];
          }
+      } else {
+         throw new Error('Module "' + path + '" Cannot be exposed! Make sure you export variables correctly and the module is present');
       }
    }
 }
