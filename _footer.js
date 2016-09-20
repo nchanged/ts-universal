@@ -1,9 +1,11 @@
 __ts__.expose(__scope__, "$_exposed_");})
 (function($scope, $isBackend) {
    var npmName = "$_npm_";
-   if (!$isBackend && npmName){
+   if (!$isBackend){
       $scope.__npm__ = $scope.__npm__ || {};
-      $scope.__npm__[npmName] = $scope.__npm__[npmName] || {};
+      if( npmName){
+         $scope.__npm__[npmName] = {};
+      }
    };
    var ts = {
       register: {},
@@ -55,6 +57,8 @@ __ts__.expose(__scope__, "$_exposed_");})
          } else {
             if( $isBackend ){
                return require(name);
+            } else {
+               return $scope.__npm__[name];
             }
          }
       },
