@@ -7,9 +7,10 @@ const Concat = require('concat-with-sourcemaps');
 const HEADER = '(function(___env___){\n/* ****** Setup ****** */\nvar __scope__ = ___env___.scope;\nvar $isBackend = ___env___.isBackend;\nvar __ts__ = ___env___.ts;\n\n'
 
 // read footer template
-let writeFooter = (exposed) => {
+let writeFooter = (exposed, npmName) => {
    let footer = fs.readFileSync(__dirname + '/_footer.js').toString()
    footer = footer.split('$_exposed_').join(exposed);
+   footer = footer.split('$_npm_').join(npmName || '');
    footer = footer.replace(/(\n|\t|\s{2})/g,'')
    return footer;
 }
@@ -18,6 +19,7 @@ let tsUniversal = (target, opts) => {
    opts = opts || {};
    var baseDir = opts.base;
    var expose = opts.expose || 'undefined';
+   var npmName = opts.npm;
    var latestFile;
    var concat = new Concat(true, 'out.js', '\n');
    // writing header first
@@ -31,6 +33,7 @@ let tsUniversal = (target, opts) => {
             fname = fname.slice(baseDir.length, fname.length);
          }
       }
+
       concat.add(null, '/* ******* ' + file.sourceMap.sources[0] +' ******* */\n__ts__.module("' + fname + '", function(exports, require){')
       concat.add(fname, file.contents, file.sourceMap);
       concat.add(null, '});\n')
@@ -43,7 +46,7 @@ let tsUniversal = (target, opts) => {
          contents: false
       });
       joinedFile.path = path.join(latestFile.base, target);
-      concat.add(null, writeFooter(expose))
+      concat.add(null, writeFooter(expose, npmName))
       joinedFile.contents = concat.content;
       joinedFile.sourceMap = JSON.parse(concat.sourceMap);
       this.push(joinedFile);

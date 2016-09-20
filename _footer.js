@@ -1,5 +1,10 @@
 __ts__.expose(__scope__, "$_exposed_");})
 (function($scope, $isBackend) {
+   var npmName = "$_npm_";
+   if (!$isBackend && npmName){
+      $scope.__npm__ = $scope.__npm__ || {};
+      $scope.__npm__[npmName] = $scope.__npm__[npmName] || {};
+   };
    var ts = {
       register: {},
       pathJoin: function() {
@@ -48,13 +53,17 @@ __ts__.expose(__scope__, "$_exposed_");})
                return self.register[target];
             }
          } else {
-            return require(name);
+            if( $isBackend ){
+               return require(name);
+            }
          }
       },
       expose: function(scope, path) {
          path = path.match(/\.js^/) ? path : path + ".js";
          var e = this.register[path];
+         var npmExpose  = !$isBackend && npmName;
          if (e !== undefined) {
+
             var useAmd = !$isBackend && typeof define == 'function' && define.amd;
             for (var key in e) {
                var value = e[key];
@@ -63,7 +72,10 @@ __ts__.expose(__scope__, "$_exposed_");})
                      return value;
                   });
                } else {
-                  $scope[key] = value
+                  if( npmName ){
+                     $scope.__npm__[npmName][key] = value;
+                  };
+                  $scope[key] = value;
                }
             }
          } else {

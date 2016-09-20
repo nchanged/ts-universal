@@ -6,13 +6,16 @@ const tsUniversal = require("./index.js");
 const sourcemaps = require('gulp-sourcemaps');
 const tsProject = ts.createProject('example/tsconfig.json');
 gulp.task('default', function() {
-   return gulp.src('example/**/*.ts')
+   var toResult = gulp.src('example/**/*.ts')
       .pipe(sourcemaps.init())
       .pipe(ts(tsProject))
 
-   .pipe(tsUniversal('build/', {
+   toResult.dts.pipe(gulp.dest('build/definitions'))
+
+   return toResult.pipe(tsUniversal('build/', {
          base: 'build/',
-         expose: 'root'
+         expose: 'root',
+         npm : 'my-lib-name'
       }))
       .pipe(rename('out.js'))
       .pipe(sourcemaps.write())
