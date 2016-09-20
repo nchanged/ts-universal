@@ -7,7 +7,7 @@ A simple gulp plugin that makes it possible to use typescript modules painlessly
 ## Features
 
 * Converts typescript output into a unversal module (1 file)
-* Exposes targets naturaly to window or NodeJS exports
+* Exposes targets naturaly to AMD/window or NodeJS
 * 100% Typescript sourcemaps support
 * Simplicity - 2 variables to configure
 * No extra libraries required!
