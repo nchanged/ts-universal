@@ -76,7 +76,7 @@ __ts__.expose(__scope__, "$_exposed_");})
                      return value;
                   });
                } else {
-                  if( npmName ){
+                  if( npmExpose ){
                      $scope.__npm__[npmName][key] = value;
                   };
                   $scope[key] = value;
