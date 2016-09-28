@@ -1,7 +1,7 @@
 {
     "compilerOptions": {
         "target": "es6",
-        "module": "commonjs",
+        "module": "amd",
         "moduleResolution": "node",
         "isolatedModules": false,
         "jsx": "react",
@@ -12,7 +12,8 @@
         "noImplicitUseStrict": false,
         "removeComments": true,
         "noLib": false,
-        "outDir": "../build",
+        //"outDir": "../build",
+        "outFile": "../out.js",
         "preserveConstEnums": true,
         "suppressImplicitAnyIndexErrors": true
     },
