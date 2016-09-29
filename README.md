@@ -15,7 +15,7 @@ Say no webpack!
 
 ## How it works
 
-*tsUniversal* works with AMD typescript importer. But instead of having AMD, tsUniversal creates a tiny works that does magic!
+*tsUniversal* works with AMD typescript importer. But instead of having AMD, tsUniversal creates a tiny header that does magic!
 
 
 ## Try it now!
