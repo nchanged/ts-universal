@@ -11,4 +11,6 @@ var __expose__ = function(n, m, w, c) {
 
 };
 __expose__("$__exposed__", "$__module_name__", $__exposed2window__, "$__consume__");
-})(typeof exports !== "undefined" ? exports : this, typeof exports !== "undefined");
+})(typeof module !== "undefined" && module.exports && typeof process === "object" ?
+    exports : typeof window !== "undefined" ? window : this,
+    typeof module !== "undefined" && module.exports && typeof process === "object");
