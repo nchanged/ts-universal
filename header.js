@@ -9,8 +9,8 @@
                 if ($isBackend) {
                     return require(name);
                 } else {
-                    Exports.__npm__ = Exports.__npm__ || {};
-                    return Exports.__npm__[name];
+                    $__exports__.__npm__ = $__exports__.__npm__ || {};
+                    return $__exports__.__npm__[name];
                 }
             }
             if (m.r) { return m.r; }
